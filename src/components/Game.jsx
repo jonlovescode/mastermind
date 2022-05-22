@@ -13,21 +13,26 @@ class Game extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.submitGuess = this.submitGuess.bind(this)
     this.renderGuess = this.renderGuess.bind(this)
-    this.renderResult = this.renderResult.bind(this)
+    // this.renderResult = this.renderResult.bind(this)
+    this.renderRemainingGames = this.renderRemainingGames.bind(this)
   }
 
   componentDidMount() {
     console.log('comp mounted')
   }
 
-  renderResult(didWin) {
-    if (didWin || this.state.guesses.length === 10) {
-      this.props.setResult(didWin)
-      this.props.setPage(2)
-    } else {
-      return <div>Incorrect guess</div>
-    }
+  renderRemainingGames() {
+    return <div>You have {10 - this.state.guesses.length} guesses remaining</div>
   }
+
+  // renderResult(didWin) {
+  //   if (didWin || this.state.guesses.length === 10) {
+  //     this.props.setResult(didWin)
+  //     this.props.setPage(2)
+  //   } else {
+  //     return <div>Incorrect guess</div>
+  //   }
+  // }
 
   renderGuess() {
     if (this.state.guesses.length > 0) {
@@ -67,7 +72,8 @@ class Game extends React.Component {
         gameResult: isCorrect ? 'win' : 'lose',
         difficulty: 'easy',
         gameType: 'random integers',
-        guesses: this.state.guesses
+        guesses: this.state.guesses,
+        gameAnswer: this.props.answer
       })
       // this.setState({
       //   completed: isCorrect
@@ -87,12 +93,13 @@ class Game extends React.Component {
     }, () => {
       console.log(this.state.currGuess)
     })
-
   }
 
   render() {
     return <div>
-
+      <button onClick={() => {
+        this.props.setPage(0)
+      }}>Back</button>
       <form>
         <label>
           guess1
@@ -112,6 +119,7 @@ class Game extends React.Component {
         </label>
         <button onClick={this.submitGuess}>Submit Guess</button>
       </form>
+      <div>{this.renderRemainingGames()}</div>
 
       <div>{this.renderGuess()}</div>
       {/* <div>{this.renderResult(this.state.completed)}</div> */}

@@ -8,7 +8,8 @@ const mastermindSchema = mongoose.Schema({
   gameResult: String,
   difficulty: String,
   gameType: String,
-  guesses: Array
+  guesses: Array,
+  gameAnswer: Array
   // term: String,
   // def: String
 });

@@ -7,7 +7,7 @@ const Controls = require("./controllers/controls.js")
 const app = express();
 
 // middleware
-// app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json())
 
 //routes

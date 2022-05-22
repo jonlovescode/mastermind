@@ -16,13 +16,16 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "r-start": "react-scripts start",
+    "r-build": "react-scripts build",
+    "start": "webpack --mode=development",
+    "build": "webpack --mode=production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-server": "nodemon server/index.js",
     "server-dev": "npx nodemon --watch server server/index.js",
-    "client-dev": "npx webpack --watch"
+    "client-dev": "npx webpack --watch",
+    "dev": "webpack serve --open"
   },
   "eslintConfig": {
     "extends": [
@@ -44,8 +47,18 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Jonathan Huang <jonathan95129@gmail.com>",
   "license": "ISC"
 }
