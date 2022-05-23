@@ -22,5 +22,8 @@ app.get('/randominteger', (req, res) => {
 
 })
 
-app.listen(3000);
-console.log(`Listening at http://localhost:3000`);
+let port = process.env.PORT || 1128;
+
+app.listen(port, function() {
+  console.log(`listening on port ${port}`);
+});
