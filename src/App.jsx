@@ -100,7 +100,7 @@ class App extends React.Component {
   }
 
   render () {
-    return <div>
+    return <div  class="page">
 
       {this.renderPage()}
     </div>
