@@ -21,6 +21,6 @@ This window will query the user on their login or registration credentials. You 
 
 games:
 Clicking on games will open a popup window.
-This window will show a grid of buttons representing games played and ordered by the date they were completed. Buttons are colored according to whether they ended in a win or a loss. Clicking on a game will show further game details.
+This window will show a grid of buttons representing games played and ordered by the date they were completed. Players not logged in will be able to see all public games played. Clicking on a game will show further game details.
 
 ---
