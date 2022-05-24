@@ -16,7 +16,9 @@ class App extends React.Component {
       answer: [],
       page: 0, //state of game page needs to be stored in mongo as gamestate
       lastGameResult : false,
-      analysis: {}
+      analysis: {},
+      login: false,
+      username: ''
 
     }
     this.homeClick = this.homeClick.bind(this)
@@ -24,10 +26,15 @@ class App extends React.Component {
     this.setPage = this.setPage.bind(this)
     this.setResult = this.setResult.bind(this)
     this.setAnalysis = this.setAnalysis.bind(this)
+    this.setLogin = this.setLogin.bind(this)
   }
 
   componentDidMount() {
     console.log('mounted ', this.state)
+  }
+
+  setLogin(username) {
+    this.setState({login:!this.state.login, username:username})
   }
 
   setAnalysis(data) {
@@ -48,42 +55,55 @@ class App extends React.Component {
 
   renderPage() {
     if (this.state.page === 0) {
-      return <Home setPage={this.setPage} clickHandler={this.homeClick}></Home>
+      return <Home username={this.state.username} isLogin={this.state.login} setLogin={this.setLogin} setPage={this.setPage} clickHandler={this.homeClick} setAnalysis={this.setAnalysis} data={this.state.games}></Home>
     } else if (this.state.page === 1) {
-      return <Game setPage={this.setPage} answer={this.state.answer} setResult={this.setResult}></Game>
+      return <Game username={this.state.username} isLogin={this.state.login} setPage={this.setPage} answer={this.state.answer} setResult={this.setResult}></Game>
     } else if (this.state.page === 2) {
       return <WinLose setPage={this.setPage} lastGameResult={this.state.lastGameResult}></WinLose>
-    } else if (this.state.page === 3) {
-      return <Completed setAnalysis={this.setAnalysis} setPage={this.setPage} data={this.state.games}></Completed>
-    } else if (this.state.page === 4) {
-      return <Analysis setPage={this.setPage} analysis={this.state.analysis}></Analysis>
-    } else if (this.state.page === 5) {
-      return <Rules setPage={this.setPage}></Rules>
     }
+
+
+    // else if (this.state.page === 3) {
+    //   return <Completed setAnalysis={this.setAnalysis} setPage={this.setPage} data={this.state.games}></Completed>
+    // } else if (this.state.page === 4) {
+    //   return <Analysis setPage={this.setPage} analysis={this.state.analysis}></Analysis>
+    // } else if (this.state.page === 5) {
+    //   return <Rules setPage={this.setPage}></Rules>
+    // }
   }
 
   homeClick(e) {
-    console.log('homeClick invoked ', e.target.title)
+
     if (e.target.title === 'Start') {
 
       axios.get('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new')
         .then((results) => {
-          console.log('homeClick results: ', results)
+
           this.setState({
             answer: results.data.split('\n').filter(Boolean)
           }, () => {
             console.log('whats my state: ', this.state)
           })
         })
+        .then(() => this.setPage(1))
         .catch((err) => {
           console.error('homeClick ran into an error: ', err)
         })
-      this.setPage(1)
+      // this.setPage(1)
     } else if (e.target.title === 'Completed') {
-      console.log('hello there')
-      axios.get('/mastermind')
+
+      let endpoint
+      let params
+      if (this.state.login) {
+        endpoint = '/privateGames'
+        params = `/${this.state.username}`
+        endpoint += params
+      } else {
+        endpoint = '/publicGames'
+      }
+      axios.get(endpoint)
         .then((results) => {
-          console.log(results)
+
           this.setState({
             games: results.data
           })
@@ -100,7 +120,7 @@ class App extends React.Component {
   }
 
   render () {
-    return <div  class="page">
+    return <div  className="page">
 
       {this.renderPage()}
     </div>

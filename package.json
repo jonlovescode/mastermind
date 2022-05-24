@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-server": "nodemon server/index.js",
-    "server-dev": "npx nodemon server/index.js",
+    "server-deploy": "npx nodemon server/index.js",
+    "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
     "dev": "webpack serve --open"
   },

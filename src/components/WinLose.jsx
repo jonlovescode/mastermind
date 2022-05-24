@@ -2,7 +2,7 @@ import React from 'react'
 
 function WinLose(props) {
   let backHome = () => {
-    console.log('backHome')
+
     props.setPage(2)
   }
 
@@ -10,7 +10,7 @@ function WinLose(props) {
     return <>
       <div>You Won!</div>
       <button onClick={() => {
-      console.log('click!')
+
       props.setPage(0)
     }}>Return To Home</button>
     </>
@@ -18,7 +18,7 @@ function WinLose(props) {
     return <>
     <div>You Lose :c</div>
     <button onClick={() => {
-      console.log('click!')
+
       props.setPage(0)
     }}>Return To Home</button>
   </>

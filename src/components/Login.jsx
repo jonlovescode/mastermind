@@ -2,7 +2,7 @@ import React from 'react'
 import '../App.css'
 
 
-function Rules(props) {
+function Login(props) {
   return (
     <div className="popup-box">
       <div className="box">
@@ -13,4 +13,4 @@ function Rules(props) {
   );
 }
 
-export default Rules
+export default Login

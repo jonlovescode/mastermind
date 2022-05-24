@@ -11,22 +11,20 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json())
 
 //routes
-app.get('/mastermind', Controls.completedGames)
+app.get('/publicGames', Controls.completedGames)
+app.get('/privateGames/:username', Controls.completedPrivGames)
 
-app.post('/completed', Controls.addGame)
-// app.post('/completed', (req, res) => {
-//   console.log('post request detected')
-// })
+app.post('/publicGames', Controls.addGame)
+app.post('/privateGames', Controls.addPrivGame)
 
-app.get('/randominteger', (req, res) => {
+app.post('/users', Controls.createUser) // to register/create user
+app.post(`/valid`, Controls.validUsername) // for valid registration, simple find({})
 
-})
+app.post('/login', Controls.login) // for verify login
 
-let port = process.env.PORT || 1128;
+let port = process.env.PORT || 3000;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
 });
 
-// app.listen(3000);
-// console.log(`Listening at http://localhost:3000`);
