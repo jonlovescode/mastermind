@@ -11,17 +11,25 @@ class Game extends React.Component {
       completed: false,
       guesses: [],
       popup: false,
+      rules: false,
     };
     this.onChange = this.onChange.bind(this);
     this.submitGuess = this.submitGuess.bind(this);
     this.renderGuess = this.renderGuess.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.toggleRules = this.toggleRules.bind(this);
     // this.renderResult = this.renderResult.bind(this)
     this.renderRemainingGames = this.renderRemainingGames.bind(this);
   }
 
   componentDidMount() {
     console.log("comp mounted");
+  }
+
+  toggleRules() {
+    this.setState({
+      rules: !this.state.rules,
+    });
   }
 
   toggle() {
@@ -208,6 +216,38 @@ class Game extends React.Component {
                 handleClose={this.toggle}
               />
             )}
+          </div>
+          <div>
+          <button
+              className="title"
+              onClick={() => {
+                this.toggleRules();
+              }}
+            >
+              Rules
+            </button>
+          {this.state.rules && (
+            <Rules
+              content={
+                <>
+                  <b className="rules">Rules Of Mastermind</b>
+                  <p className="rules">
+                    Mastermind is a code-breaking game in which you are given 10
+                    chances to crack a 4-digit code. Each digit is between 0-7 inclusive and permits repeats. Upon submitting each guess,
+                    you will be informed how many of your guesses were either:
+                  </p>
+                  <p className="rules">
+                    -a correct number AND the correct location (blue)
+                  </p>
+                  <p className="rules">
+                    -a correct number AND NOT the correct location (yellow)
+                  </p>
+                  <p className="rules">-NOT a correct number (red)</p>
+                </>
+              }
+              handleClose={this.toggleRules}
+            />
+          )}
           </div>
         </header>
         <form className="container">

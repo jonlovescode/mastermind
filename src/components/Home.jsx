@@ -79,7 +79,7 @@ function Home(props) {
                   <b className="rules">Rules Of Mastermind</b>
                   <p className="rules">
                     Mastermind is a code-breaking game in which you are given 10
-                    chances to crack a 4-digit code. Upon submitting each guess,
+                    chances to crack a 4-digit code. Each digit is between 0-7 inclusive and permits repeats. Upon submitting each guess,
                     you will be informed how many of your guesses were either:
                   </p>
                   <p className="rules">
