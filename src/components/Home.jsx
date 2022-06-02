@@ -113,7 +113,7 @@ function Home(props) {
                               toggleAnalysis(game);
                             }}
                           >
-                            {game.date.substring(0, 10)}
+                            {game.date.substring(0, 10) + " played by " + (game.user ? game.user : "guest")}
                           </button>
                         </div>
                       );
@@ -133,6 +133,7 @@ function Home(props) {
                   </b>
                   {props.isLogin ? <div>User: {game.user}</div> : <></>}
                   <div>Result: {game.gameResult}</div>
+                  <div>Score: {game.score}</div>
                   <div>Answer: {game.gameAnswer}</div>
                   <div>Guesses:</div>
                   <div>
@@ -152,7 +153,7 @@ function Home(props) {
           )}
 
           <button onClick={toggleLogin}>
-            {props.isLogin ? "logout" : "login"}
+            {props.isLogin ? "logout of " + props.username : "login"}
           </button>
           {popLogin && !props.isLogin && (
             <Login
@@ -177,7 +178,7 @@ function Home(props) {
                     ></input>
                   </div>
 
-                  <button
+                  <button className="Login"
                     onClick={() => {
                       const user = {
                         username: username,
@@ -205,7 +206,7 @@ function Home(props) {
                   >
                     Login
                   </button>
-                  <button
+                  <button className="Signup"
                     onClick={() => {
                       //first validate username
                       //then post to users

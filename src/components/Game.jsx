@@ -120,6 +120,7 @@ class Game extends React.Component {
           guesses: this.state.guesses,
           gameAnswer: this.props.answer,
           date: new Date(),
+          score: 10 - this.state.guesses.length,
         })
         .then(() => {
           console.log("posted to " + endpoint + "successfully");
@@ -134,6 +135,12 @@ class Game extends React.Component {
   }
 
   onChange(e) {
+    console.log('is there a dash: ', e.target.value.match(/[0-7]/), e.target.value, 7 < e.target.value ||  e.target.value < 0)
+    if ((e.target.value.match(/[0-7]/) && e.target.value.match(/[0-7]/) === null) ||  7 < e.target.value ||  e.target.value < 0) {
+      e.target.value = "0"
+      alert('you must enter values between 0 and 7 inclusive')
+      return
+    }
     let index = parseInt(e.target.title);
     let arr = this.state.currGuess;
     arr[index] = e.target.value;
@@ -258,32 +265,44 @@ class Game extends React.Component {
                   <input
                     className="guessbox"
                     onChange={this.onChange}
-                    type="number"
+                    type="text"
                     title="0"
+                    min="0"
+                    max="7"
+                    defaultValue="0"
                   ></input>
                 </label>
                 <label>
                   <input
                     className="guessbox"
                     onChange={this.onChange}
-                    type="number"
+                    type="text"
                     title="1"
+                    min="0"
+                    max="7"
+                    defaultValue="0"
                   ></input>
                 </label>
                 <label>
                   <input
                     className="guessbox"
                     onChange={this.onChange}
-                    type="number"
+                    type="text"
                     title="2"
+                    min="0"
+                    max="7"
+                    defaultValue="0"
                   ></input>
                 </label>
                 <label>
                   <input
                     className="guessbox"
                     onChange={this.onChange}
-                    type="number"
+                    type="text"
                     title="3"
+                    min="0"
+                    max="7"
+                    defaultValue="0"
                   ></input>
                 </label>
               </div>

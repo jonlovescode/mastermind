@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-// const connection = 'mongodb://localhost:27017/mastermind'
+const connection = 'mongodb://localhost:27017/mastermind'
 // mongoose.connect(connection, {useNewUrlParser: true, useUnifiedTopology: true })
 // console.log('mongoose connecting at: ' + connection);
 mongoose.connect(`mongodb+srv://${process.env.myusername}:${process.env.mypassword}@cluster0.moabh.mongodb.net/mastermind?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true });
@@ -12,18 +12,19 @@ const publicGames = mongoose.Schema({
   gameType: String,
   guesses: Array,
   gameAnswer: Array,
-  date: Date
+  date: Date,
+  score: Number
 });
 
-const privateGames = mongoose.Schema({
-  user: String,
-  gameResult: String,
-  difficulty: String,
-  gameType: String,
-  guesses: Array,
-  gameAnswer: Array,
-  date: Date
-});
+// const privateGames = mongoose.Schema({
+//   user: String,
+//   gameResult: String,
+//   difficulty: String,
+//   gameType: String,
+//   guesses: Array,
+//   gameAnswer: Array,
+//   date: Date
+// });
 
 const users = mongoose.Schema({
   username: String,
@@ -35,9 +36,9 @@ const users = mongoose.Schema({
 });
 
 const PublicGames = mongoose.model('PublicGames', publicGames);
-const PrivateGames = mongoose.model('PrivateGames', privateGames);
+// const PrivateGames = mongoose.model('PrivateGames', privateGames);
 const Users = mongoose.model('Users', users);
 
 module.exports.pubg = PublicGames;
-module.exports.privg = PrivateGames;
+// module.exports.privg = PrivateGames;
 module.exports.users = Users;

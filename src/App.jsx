@@ -12,7 +12,6 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      games: [], //<-- this should be stored in db
       answer: [],
       page: 0, //state of game page needs to be stored in mongo as gamestate
       lastGameResult : false,
@@ -61,15 +60,6 @@ class App extends React.Component {
     } else if (this.state.page === 2) {
       return <WinLose setPage={this.setPage} lastGameResult={this.state.lastGameResult}></WinLose>
     }
-
-
-    // else if (this.state.page === 3) {
-    //   return <Completed setAnalysis={this.setAnalysis} setPage={this.setPage} data={this.state.games}></Completed>
-    // } else if (this.state.page === 4) {
-    //   return <Analysis setPage={this.setPage} analysis={this.state.analysis}></Analysis>
-    // } else if (this.state.page === 5) {
-    //   return <Rules setPage={this.setPage}></Rules>
-    // }
   }
 
   homeClick(e) {

@@ -5,7 +5,9 @@ const users = require('../db.js').users
 
 
 exports.findAll = () => {
-  return pubg.find({})
+  // return pubg.find({})
+  return pubg.find({user : ""})
+
 }
 
 exports.add = (data) => {
@@ -13,10 +15,12 @@ exports.add = (data) => {
 }
 exports.findAllPriv = (username) => {
 
-  return privg.find({user : username})
+  return pubg.find({user : username})
+  // return pubg.find({})
 }
 exports.addPriv = (data) => {
-  return privg.create(data)
+  return pubg.create(data)
+  // return privg.create(data)
 }
 
 const saltGenerator = (username) => {
