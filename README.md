@@ -1,4 +1,4 @@
-LinkedIn Coding Challenge: Mastermind by Jonathan Huang
+Mastermind by Jonathan Huang
 
 Access: https://jh-mastermind.herokuapp.com/
 
